@@ -1,0 +1,32 @@
+{% load static %}
+<header class="ab-navbar navbar navbar-expand-lg navbar-light py-3">
+  <div class="ab-container d-flex flex-wrap align-items-center justify-content-between w-100">
+    <a href="{% url 'core:home' %}" class="navbar-brand d-flex align-items-center gap-2 m-0">
+      <img src="{% static 'tabler/img/logo.svg' %}" alt="{{ SITE_NAME }} logo">
+    </a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#abNavbarNav" aria-controls="abNavbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="abNavbarNav">
+      <ul class="navbar-nav mx-lg-4 gap-lg-2 mt-3 mt-lg-0">
+        <li class="nav-item"><a class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}" href="{% url 'core:home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link{% if request.resolver_match.url_name == 'about' %} active{% endif %}" href="{% url 'core:about' %}">About</a></li>
+        <li class="nav-item"><a class="nav-link{% if request.resolver_match.url_name == 'recommender' %} active{% endif %}" href="{% url 'core:recommender' %}">AI Recommender</a></li>
+        <li class="nav-item"><a class="nav-link{% if request.resolver_match.url_name == 'prompt_generator' %} active{% endif %}" href="{% url 'core:prompt_generator' %}">Prompt Generator</a></li>
+        <li class="nav-item"><a class="nav-link{% if request.resolver_match.url_name == 'resources' %} active{% endif %}" href="{% url 'core:resources' %}">Resources</a></li>
+        <li class="nav-item"><a class="nav-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}" href="{% url 'core:contact' %}">Contact</a></li>
+      </ul>
+      <div class="d-flex d-lg-none flex-column gap-2 mt-3 pt-3 border-top">
+        <a href="{% url 'core:dashboard' %}" class="btn btn-outline-ab btn-sm btn-lift">Dashboard</a>
+        <a href="{% url 'core:recommender' %}" class="btn btn-gradient btn-sm btn-lift">Get Started</a>
+      </div>
+    </div>
+
+    <div class="d-none d-lg-flex align-items-center gap-2">
+      <a href="{% url 'core:dashboard' %}" class="btn btn-outline-ab btn-sm btn-lift">Dashboard</a>
+      <a href="{% url 'core:recommender' %}" class="btn btn-gradient btn-sm btn-lift">Get Started</a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="ab-section pb-0">
+  <div class="ab-container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4 reveal">
+      <div>
+        <span class="ab-eyebrow"><i class="ti ti-layout-dashboard"></i> Dashboard</span>
+        <h1 class="h2 mt-2 mb-0">Your AI activity overview</h1>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="{% url 'core:recommender' %}" class="btn btn-outline-ab btn-lift"><i class="ti ti-robot me-1"></i> New Recommendation</a>
+        <a href="{% url 'core:prompt_generator' %}" class="btn btn-gradient btn-lift"><i class="ti ti-wand me-1"></i> New Prompt</a>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="row g-4 mb-4 reveal">
+      <div class="col-sm-6 col-lg-3">
+        <div class="ab-dashboard-card p-3 d-flex align-items-center gap-3">
+          <span class="ab-dash-icon" style="background:var(--ab-gradient);"><i class="ti ti-users"></i></span>
+          <div>
+            <h2 class="mb-0">{{ total_users }}</h2>
+            <span class="text-secondary small">Profiles created</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="ab-dashboard-card p-3 d-flex align-items-center gap-3">
+          <span class="ab-dash-icon" style="background:linear-gradient(135deg,#4F46E5,#06B6D4);"><i class="ti ti-robot"></i></span>
+          <div>
+            <h2 class="mb-0">{{ total_recommendations }}</h2>
+            <span class="text-secondary small">Recommendations generated</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="ab-dashboard-card p-3 d-flex align-items-center gap-3">
+          <span class="ab-dash-icon" style="background:linear-gradient(135deg,#8B5CF6,#4F46E5);"><i class="ti ti-wand"></i></span>
+          <div>
+            <h2 class="mb-0">{{ total_prompts }}</h2>
+            <span class="text-secondary small">Prompts generated</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="ab-dashboard-card p-3 d-flex align-items-center gap-3">
+          <span class="ab-dash-icon" style="background:linear-gradient(135deg,#06B6D4,#8B5CF6);"><i class="ti ti-sparkles"></i></span>
+          <div>
+            <h2 class="mb-0">Gemini</h2>
+            <span class="text-secondary small">AI engine powering results</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <!-- Chart -->
+      <div class="col-lg-5 reveal">
+        <div class="ab-dashboard-card p-4 h-100">
+          <h3 class="h5 mb-3">User Overview</h3>
+          {% if user_type_counts %}
+            <canvas id="userTypeChart" height="220"></canvas>
+          {% else %}
+            <p class="text-secondary small mb-0">No user profiles yet — generate a recommendation to see this chart populate.</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Recent recommendations -->
+      <div class="col-lg-7 reveal reveal-delay-1">
+        <div class="ab-dashboard-card p-4 h-100">
+          <h3 class="h5 mb-3">Recent Recommendations</h3>
+          {% if recent_recommendations %}
+            <div class="d-flex flex-column gap-3">
+              {% for rec in recent_recommendations %}
+              <div class="d-flex justify-content-between align-items-start gap-3 pb-3 border-bottom">
+                <div>
+                  <strong class="d-block">{{ rec.user.name }}</strong>
+                  <span class="text-secondary small">{{ rec.goal|truncatechars:90 }}</span>
+                </div>
+                <span class="badge bg-azure-lt text-nowrap">{{ rec.created_at|date:"M j, Y" }}</span>
+              </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p class="text-secondary small mb-0">No recommendations yet. <a href="{% url 'core:recommender' %}">Generate your first one</a>.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent prompts -->
+    <div class="row g-4 mb-5">
+      <div class="col-12 reveal">
+        <div class="ab-dashboard-card p-4">
+          <h3 class="h5 mb-3">Recent Prompt History</h3>
+          {% if recent_prompts %}
+            <div class="table-responsive">
+              <table class="table table-vcenter mb-0">
+                <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th class="text-end">Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for prompt in recent_prompts %}
+                  <tr>
+                    <td>{{ prompt.task }}</td>
+                    <td class="text-end text-secondary small">{{ prompt.created_at|date:"M j, Y g:i A" }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <p class="text-secondary small mb-0">No prompts yet. <a href="{% url 'core:prompt_generator' %}">Generate your first one</a>.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+{% if user_type_counts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var ctx = document.getElementById("userTypeChart");
+    if (!ctx) return;
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: {{ user_type_labels_json|safe }},
+        datasets: [{
+          data: {{ user_type_values_json|safe }},
+          backgroundColor: ["#4F46E5", "#06B6D4", "#8B5CF6", "#818CF8", "#22D3EE"],
+          borderWidth: 0,
+        }],
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: "bottom" } },
+      },
+    });
+  });
+</script>
+{% endif %}
+{% endblock %}

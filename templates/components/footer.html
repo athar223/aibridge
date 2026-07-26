@@ -1,0 +1,43 @@
+{% load static %}
+<footer class="ab-footer pt-5 pb-4 mt-auto">
+  <div class="ab-container">
+    <div class="row gy-4">
+      <div class="col-lg-4">
+        <div class="ab-footer-brand d-flex align-items-center gap-2 mb-3">
+          <img src="{% static 'tabler/img/logo.svg' %}" alt="{{ SITE_NAME }} logo" style="filter: brightness(0) invert(1);">
+        </div>
+        <p class="mb-0" style="max-width: 320px;">{{ SITE_TAGLINE }}. Helping students, freelancers, teachers, professionals and small business owners put AI to work.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="text-white h5 mb-3">Product</h4>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="{% url 'core:recommender' %}">AI Recommender</a></li>
+          <li><a href="{% url 'core:prompt_generator' %}">Prompt Generator</a></li>
+          <li><a href="{% url 'core:dashboard' %}">Dashboard</a></li>
+          <li><a href="{% url 'core:resources' %}">Resources</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="text-white h5 mb-3">Company</h4>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="{% url 'core:about' %}">About</a></li>
+          <li><a href="{% url 'core:contact' %}">Contact</a></li>
+          <li><a href="{% url 'core:home' %}#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h4 class="text-white h5 mb-3">Stay in the loop</h4>
+        <p class="mb-3">Get AI tool picks and prompt tips in your inbox, occasionally.</p>
+        <form class="d-flex gap-2" action="{% url 'core:contact' %}" method="get">
+          <input type="email" class="form-control form-control-sm" placeholder="you@example.com" aria-label="Email">
+          <button class="btn btn-gradient btn-sm flex-shrink-0" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <hr class="my-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small">
+      <span>&copy; {% now "Y" %} {{ SITE_NAME }}. All rights reserved.</span>
+      <span>Built with Django &amp; Google Gemini.</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}AI Tool Recommender — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="ab-hero py-5">
+  <div class="ab-container text-center reveal">
+    <span class="ab-eyebrow"><i class="ti ti-robot"></i> AI Tool Recommender</span>
+    <h1 class="mt-3 mb-3">Tell us your goal. We'll find your AI tools.</h1>
+    <p class="ab-lede mx-auto" style="max-width:600px;">Describe what you're trying to achieve and Gemini will recommend the AI tools, resources and next steps to get there.</p>
+  </div>
+</section>
+
+<section class="ab-section pt-0">
+  <div class="ab-container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 reveal">
+        <div class="ab-form-card p-4 p-md-5">
+          <form method="post" novalidate id="recommenderForm">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="{{ form.name.id_for_label }}">Name</label>
+                {{ form.name }}
+                {% for error in form.name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="{{ form.user_type.id_for_label }}">I am a...</label>
+                {{ form.user_type }}
+                {% for error in form.user_type.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="{{ form.goal.id_for_label }}">Your goal</label>
+                {{ form.goal }}
+                {% for error in form.goal.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-gradient btn-lg w-100 mt-4 btn-lift" id="recommenderSubmitBtn">
+              <i class="ti ti-sparkles me-1"></i> Get My Recommendations
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% if result %}
+      {% if result.error %}
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="alert alert-danger">
+              <strong>We couldn't reach the AI service.</strong>
+              <div class="small mt-1">{{ result.error }}</div>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="row g-4 ab-fade-in">
+          <div class="col-lg-4">
+            <h3 class="h5 mb-3"><i class="ti ti-tool text-primary me-1"></i> Recommended AI Tools</h3>
+            <div class="d-flex flex-column gap-3">
+              {% for tool in result.tools %}
+              <div class="ab-card ab-result-card p-3">
+                <h4 class="h6 mb-1">{{ tool.name }}</h4>
+                <p class="text-secondary small mb-0">{{ tool.why }}</p>
+              </div>
+              {% empty %}
+              <p class="text-secondary small">No tools returned.</p>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h3 class="h5 mb-3"><i class="ti ti-books text-primary me-1"></i> Learning Resources</h3>
+            <div class="ab-card p-3">
+              <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
+                {% for resource in result.resources %}
+                <li class="d-flex gap-2"><i class="ti ti-point-filled text-primary mt-1"></i><span class="small">{{ resource }}</span></li>
+                {% empty %}
+                <li class="text-secondary small">No resources returned.</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h3 class="h5 mb-3"><i class="ti ti-checklist text-primary me-1"></i> Next Steps</h3>
+            <div class="ab-card p-3">
+              <ol class="mb-0 ps-3 d-flex flex-column gap-2">
+                {% for step in result.next_steps %}
+                <li class="small">{{ step }}</li>
+                {% empty %}
+                <li class="text-secondary small">No next steps returned.</li>
+                {% endfor %}
+              </ol>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("recommenderForm");
+    var btn = document.getElementById("recommenderSubmitBtn");
+    if (form && btn && window.AIBridge) {
+      window.AIBridge.submitWithLoading(form, btn, "Thinking...");
+    }
+  });
+</script>
+{% endblock %}

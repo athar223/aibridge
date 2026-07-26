@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ SITE_NAME }} — {{ SITE_TAGLINE }}{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+<section class="ab-hero">
+  <div class="ab-hero-blob" style="width:340px;height:340px;background:#4F46E5;top:-80px;left:-100px;"></div>
+  <div class="ab-hero-blob" style="width:280px;height:280px;background:#06B6D4;top:60px;right:-80px;animation-delay:2s;"></div>
+
+  <div class="ab-container position-relative">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6 reveal">
+        <span class="ab-eyebrow"><i class="ti ti-sparkles"></i> AI Adoption Platform</span>
+        <h1 class="mt-3 mb-3">Bridge the Gap Between You and <span class="text-gradient">AI</span></h1>
+        <p class="ab-lede mb-4">Learn, discover and use AI effectively for study, freelancing and business growth &mdash; with recommendations and prompts built around your exact goal.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{% url 'core:recommender' %}" class="btn btn-gradient btn-lg btn-lift px-4">Get Started</a>
+          <a href="#features" class="btn btn-outline-ab btn-lg btn-lift px-4">Explore Features</a>
+        </div>
+        <div class="d-flex align-items-center gap-4 mt-5">
+          <div class="ab-stat">
+            <h2 class="text-gradient mb-0">5</h2>
+            <span>User categories served</span>
+          </div>
+          <div class="vr d-none d-sm-block" style="height:40px;"></div>
+          <div class="ab-stat">
+            <h2 class="text-gradient mb-0">AI</h2>
+            <span>Powered by Google Gemini</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 reveal reveal-delay-2">
+        <div class="ab-hero-demo">
+          <div class="ab-hero-demo-bar">
+            <span class="ab-dot" style="background:#f87171;"></span>
+            <span class="ab-dot" style="background:#fbbf24;"></span>
+            <span class="ab-dot" style="background:#34d399;"></span>
+          </div>
+          <div class="p-4">
+            <div class="ab-eyebrow mb-3"><i class="ti ti-robot"></i> AI Recommender</div>
+            <p class="text-secondary small mb-1">Your goal</p>
+            <div class="border rounded-3 p-2 px-3 mb-3 small">"I want to learn Python for data analysis."</div>
+            <p class="text-secondary small mb-2">Recommended for you</p>
+            <div class="d-flex align-items-center gap-2 mb-2 p-2 rounded-3" style="background:var(--ab-surface);">
+              <span class="ab-card-icon" style="width:32px;height:32px;font-size:1rem;"><i class="ti ti-brand-python"></i></span>
+              <div class="small"><strong>ChatGPT + Python</strong><br><span class="text-secondary">Guided, interactive learning</span></div>
+            </div>
+            <div class="d-flex align-items-center gap-2 p-2 rounded-3" style="background:var(--ab-surface);">
+              <span class="ab-card-icon" style="width:32px;height:32px;font-size:1rem;"><i class="ti ti-chart-dots"></i></span>
+              <div class="small"><strong>Google Colab</strong><br><span class="text-secondary">Free, code-ready environment</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="ab-section" id="about">
+  <div class="ab-container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6 reveal">
+        <span class="ab-eyebrow"><i class="ti ti-bulb"></i> About AIBridge</span>
+        <h2 class="mt-3 mb-3">One platform to discover, learn and apply AI</h2>
+        <p class="ab-lede">AIBridge was built to close the gap between knowing AI exists and actually using it well. Instead of guessing which tool to try or how to prompt it, you get a guided path tailored to your goals &mdash; whether that's acing an assignment, landing freelance clients, or growing a small business.</p>
+      </div>
+      <div class="col-lg-6 reveal reveal-delay-1">
+        <div class="row row-cols-2 g-3">
+          <div class="col"><div class="ab-card p-3 h-100"><i class="ti ti-target-arrow text-primary fs-2"></i><h4 class="h5 mt-2 mb-1">Goal-first</h4><p class="text-secondary small mb-0">Recommendations built around what you're trying to achieve.</p></div></div>
+          <div class="col"><div class="ab-card p-3 h-100"><i class="ti ti-message-2 text-primary fs-2"></i><h4 class="h5 mt-2 mb-1">Better prompts</h4><p class="text-secondary small mb-0">Turn a vague idea into a prompt that gets real results.</p></div></div>
+          <div class="col"><div class="ab-card p-3 h-100"><i class="ti ti-books text-primary fs-2"></i><h4 class="h5 mt-2 mb-1">Curated learning</h4><p class="text-secondary small mb-0">Hand-picked resources across AI, code, freelancing &amp; more.</p></div></div>
+          <div class="col"><div class="ab-card p-3 h-100"><i class="ti ti-chart-bar text-primary fs-2"></i><h4 class="h5 mt-2 mb-1">Track progress</h4><p class="text-secondary small mb-0">A dashboard of every recommendation and prompt you've generated.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEM ================= -->
+<section class="ab-section" style="background:var(--ab-surface);">
+  <div class="ab-container">
+    <div class="text-center mx-auto mb-5 reveal" style="max-width:640px;">
+      <span class="ab-eyebrow"><i class="ti ti-alert-triangle"></i> The Problem</span>
+      <h2 class="mt-3 mb-3">Millions know about AI. Few know how to use it well.</h2>
+      <p class="ab-lede">Awareness of AI has exploded &mdash; but turning that awareness into real, practical skill is still hard.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-list-search"></i></div>
+          <h4 class="h5 mb-2">Choosing the right AI tools</h4>
+          <p class="text-secondary small mb-0">Hundreds of tools launch every month &mdash; picking the right one wastes hours.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-1">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-message-question"></i></div>
+          <h4 class="h5 mb-2">Writing effective prompts</h4>
+          <p class="text-secondary small mb-0">A vague prompt gets a vague answer &mdash; and most people never learn the difference.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-2">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-school"></i></div>
+          <h4 class="h5 mb-2">Learning AI skills</h4>
+          <p class="text-secondary small mb-0">Tutorials are scattered, outdated, or too generic to apply to a real goal.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-notebook"></i></div>
+          <h4 class="h5 mb-2">Applying AI in studies</h4>
+          <p class="text-secondary small mb-0">Students want to use AI to learn faster &mdash; without knowing where to start.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-1">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-briefcase"></i></div>
+          <h4 class="h5 mb-2">Applying AI in freelancing</h4>
+          <p class="text-secondary small mb-0">Freelancers need AI leverage to compete &mdash; but rarely know which workflows help.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-2">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-building-store"></i></div>
+          <h4 class="h5 mb-2">Applying AI in business</h4>
+          <p class="text-secondary small mb-0">Small business owners want AI's ROI, without the technical overhead.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="ab-section" id="features">
+  <div class="ab-container">
+    <div class="text-center mx-auto mb-5 reveal" style="max-width:640px;">
+      <span class="ab-eyebrow"><i class="ti ti-stars"></i> Features</span>
+      <h2 class="mt-3 mb-3">Everything you need to put AI to work</h2>
+      <p class="ab-lede">Purpose-built tools that turn "I should try AI" into "here's exactly what to do."</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-robot"></i></div>
+          <h4 class="h5 mb-2">AI Tool Recommender</h4>
+          <p class="text-secondary small mb-0">Tell us your goal, get the exact AI tools worth using &mdash; and why.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal reveal-delay-1">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-wand"></i></div>
+          <h4 class="h5 mb-2">Prompt Generator</h4>
+          <p class="text-secondary small mb-0">Turn any task into beginner, professional and advanced prompts instantly.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal reveal-delay-2">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-library"></i></div>
+          <h4 class="h5 mb-2">Learning Resources</h4>
+          <p class="text-secondary small mb-0">Curated courses and guides across AI, code, freelancing, marketing &amp; education.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal reveal-delay-3">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-layout-dashboard"></i></div>
+          <h4 class="h5 mb-2">Personal Dashboard</h4>
+          <p class="text-secondary small mb-0">Revisit every recommendation and prompt you've ever generated.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="ab-section" style="background:var(--ab-surface);">
+  <div class="ab-container">
+    <div class="text-center mx-auto mb-5 reveal" style="max-width:640px;">
+      <span class="ab-eyebrow"><i class="ti ti-route"></i> How It Works</span>
+      <h2 class="mt-3 mb-3">From goal to action in three steps</h2>
+    </div>
+    <div class="row g-4 text-center">
+      <div class="col-md-4 reveal">
+        <div class="position-relative d-inline-block mb-3">
+          <span class="ab-step-number">1</span>
+          <span class="ab-step-line d-none d-md-block"></span>
+        </div>
+        <h4 class="h5 mb-2">Tell us your goal</h4>
+        <p class="text-secondary small">Share who you are and what you're trying to achieve.</p>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-1">
+        <div class="position-relative d-inline-block mb-3">
+          <span class="ab-step-number">2</span>
+          <span class="ab-step-line d-none d-md-block"></span>
+        </div>
+        <h4 class="h5 mb-2">Get AI-powered guidance</h4>
+        <p class="text-secondary small">Gemini analyzes your goal and returns tools, resources and next steps.</p>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-2">
+        <div class="position-relative d-inline-block mb-3">
+          <span class="ab-step-number">3</span>
+        </div>
+        <h4 class="h5 mb-2">Take action</h4>
+        <p class="text-secondary small">Use the recommended tools and prompts &mdash; track it all from your dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USER CATEGORIES ================= -->
+<section class="ab-section">
+  <div class="ab-container">
+    <div class="text-center mx-auto mb-5 reveal" style="max-width:640px;">
+      <span class="ab-eyebrow"><i class="ti ti-users"></i> Who It's For</span>
+      <h2 class="mt-3 mb-3">Built for how you actually work</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-6 col-lg col-md-4 reveal">
+        <div class="ab-card ab-category-card h-100">
+          <img src="https://loremflickr.com/400/300/student,study?lock=11" alt="Student" class="ab-category-photo" loading="lazy">
+          <div class="ab-card-icon"><i class="ti ti-school"></i></div>
+          <h4 class="h5 mb-0">Students</h4>
+        </div>
+      </div>
+      <div class="col-6 col-lg col-md-4 reveal reveal-delay-1">
+        <div class="ab-card ab-category-card h-100">
+          <img src="https://loremflickr.com/400/300/freelancer,laptop?lock=12" alt="Freelancer" class="ab-category-photo" loading="lazy">
+          <div class="ab-card-icon"><i class="ti ti-briefcase"></i></div>
+          <h4 class="h5 mb-0">Freelancers</h4>
+        </div>
+      </div>
+      <div class="col-6 col-lg col-md-4 reveal reveal-delay-2">
+        <div class="ab-card ab-category-card h-100">
+          <img src="https://loremflickr.com/400/300/teacher,classroom?lock=13" alt="Teacher" class="ab-category-photo" loading="lazy">
+          <div class="ab-card-icon"><i class="ti ti-chalkboard"></i></div>
+          <h4 class="h5 mb-0">Teachers</h4>
+        </div>
+      </div>
+      <div class="col-6 col-lg col-md-4 reveal reveal-delay-3">
+        <div class="ab-card ab-category-card h-100">
+          <img src="https://loremflickr.com/400/300/business,office?lock=14" alt="Professional" class="ab-category-photo" loading="lazy">
+          <div class="ab-card-icon"><i class="ti ti-building-skyscraper"></i></div>
+          <h4 class="h5 mb-0">Professionals</h4>
+        </div>
+      </div>
+      <div class="col-6 col-lg col-md-4 reveal reveal-delay-4">
+        <div class="ab-card ab-category-card h-100">
+          <img src="https://loremflickr.com/400/300/smallbusiness,shop?lock=15" alt="Small Business Owner" class="ab-category-photo" loading="lazy">
+          <div class="ab-card-icon"><i class="ti ti-storefront"></i></div>
+          <h4 class="h5 mb-0">Small Business Owners</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AI DEMO ================= -->
+<section class="ab-section" style="background:var(--ab-surface);">
+  <div class="ab-container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6 reveal">
+        <span class="ab-eyebrow"><i class="ti ti-flask"></i> See It In Action</span>
+        <h2 class="mt-3 mb-3">Ask a question. Get a real plan.</h2>
+        <p class="ab-lede mb-4">Every recommendation and prompt is generated live by Google Gemini &mdash; tailored to the goal you describe, not a generic checklist.</p>
+        <a href="{% url 'core:recommender' %}" class="btn btn-gradient btn-lift px-4">Try the Recommender</a>
+      </div>
+      <div class="col-lg-6 reveal reveal-delay-1">
+        <div class="ab-hero-demo p-4">
+          <p class="text-secondary small mb-2">Task</p>
+          <div class="border rounded-3 p-2 px-3 mb-3 small">"Write a tourism blog."</div>
+          <p class="text-secondary small mb-2">Professional prompt</p>
+          <div class="rounded-3 p-3 small" style="background:var(--ab-surface);">
+            "Act as a travel content writer. Write a 600-word blog post about visiting Kyoto in autumn, aimed at first-time travelers. Include a catchy title, an engaging intro, 3 subheaded sections, and a call to action."
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="ab-section">
+  <div class="ab-container">
+    <div class="text-center mx-auto mb-5 reveal" style="max-width:640px;">
+      <span class="ab-eyebrow"><i class="ti ti-quote"></i> Testimonials</span>
+      <h2 class="mt-3 mb-3">Loved by learners and builders</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="ab-card p-4 h-100">
+          <p class="ab-testimonial-quote">"AIBridge told me exactly which AI tools to use for my thesis research. Saved me weeks."</p>
+          <div class="d-flex align-items-center gap-2 mt-3">
+            <img src="https://loremflickr.com/160/160/portrait,woman?lock=21" alt="Aisha K." class="ab-avatar-photo" loading="lazy">
+            <div><strong class="d-block">Aisha K.</strong><span class="text-secondary small">Graduate Student</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-1">
+        <div class="ab-card p-4 h-100">
+          <p class="ab-testimonial-quote">"The prompt generator alone is worth it. My client deliverables got noticeably better."</p>
+          <div class="d-flex align-items-center gap-2 mt-3">
+            <img src="https://loremflickr.com/160/160/portrait,man?lock=22" alt="Daniel R." class="ab-avatar-photo" loading="lazy">
+            <div><strong class="d-block">Daniel R.</strong><span class="text-secondary small">Freelance Designer</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal reveal-delay-2">
+        <div class="ab-card p-4 h-100">
+          <p class="ab-testimonial-quote">"Finally, a tool that explains AI in a way that fits my small business, not a Fortune 500."</p>
+          <div class="d-flex align-items-center gap-2 mt-3">
+            <img src="https://loremflickr.com/160/160/portrait,woman,business?lock=23" alt="Maria S." class="ab-avatar-photo" loading="lazy">
+            <div><strong class="d-block">Maria S.</strong><span class="text-secondary small">Small Business Owner</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="ab-section" style="background:var(--ab-surface);" id="faq">
+  <div class="ab-container">
+    <div class="row gy-5">
+      <div class="col-lg-4 reveal">
+        <span class="ab-eyebrow"><i class="ti ti-help"></i> FAQ</span>
+        <h2 class="mt-3 mb-3">Frequently asked questions</h2>
+        <p class="ab-lede">Can't find what you're looking for? <a href="{% url 'core:contact' %}">Reach out to us</a>.</p>
+      </div>
+      <div class="col-lg-8 reveal reveal-delay-1">
+        <details class="ab-faq-item" open>
+          <summary class="ab-faq-question">Is AIBridge free to use?<i class="ti ti-plus ab-faq-icon"></i></summary>
+          <div class="ab-faq-answer">Yes. Core features &mdash; the recommender, prompt generator and resource library &mdash; are free to use.</div>
+        </details>
+        <details class="ab-faq-item">
+          <summary class="ab-faq-question">Which AI model powers the recommendations?<i class="ti ti-plus ab-faq-icon"></i></summary>
+          <div class="ab-faq-answer">AIBridge uses Google's Gemini API to analyze your goal and generate tailored recommendations and prompts.</div>
+        </details>
+        <details class="ab-faq-item">
+          <summary class="ab-faq-question">Do I need any technical background?<i class="ti ti-plus ab-faq-icon"></i></summary>
+          <div class="ab-faq-answer">Not at all. AIBridge is designed for complete beginners as well as experienced professionals.</div>
+        </details>
+        <details class="ab-faq-item">
+          <summary class="ab-faq-question">Can teachers and businesses use this too?<i class="ti ti-plus ab-faq-icon"></i></summary>
+          <div class="ab-faq-answer">Yes &mdash; AIBridge supports students, freelancers, teachers, professionals and small business owners alike.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="ab-section">
+  <div class="ab-container">
+    <div class="ab-cta reveal">
+      <h2 class="mb-3">Ready to bridge the gap?</h2>
+      <p class="mb-4 mx-auto" style="max-width:520px;">Get a personalized AI action plan in under a minute &mdash; no signup required.</p>
+      <a href="{% url 'core:recommender' %}" class="btn btn-light btn-lg btn-lift px-4 fw-bold">Get Started Free</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

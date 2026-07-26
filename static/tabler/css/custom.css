@@ -1,0 +1,363 @@
+/* ==========================================================================
+   AIBridge — custom design layer on top of Tabler Core
+   Premium SaaS marketing + dashboard styling. Lightweight, no build step.
+   ========================================================================== */
+
+:root {
+  --ab-primary: #4F46E5;
+  --ab-primary-dark: #4338CA;
+  --ab-secondary: #06B6D4;
+  --ab-accent: #8B5CF6;
+  --ab-bg: #FFFFFF;
+  --ab-surface: #F9FAFB;
+  --ab-border: #E5E7EB;
+  --ab-text: #111827;
+  --ab-text-muted: #6B7280;
+  --ab-gradient: linear-gradient(135deg, var(--ab-primary) 0%, var(--ab-accent) 55%, var(--ab-secondary) 100%);
+  --ab-radius: 16px;
+  --ab-shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06), 0 1px 3px rgba(17, 24, 39, 0.08);
+  --ab-shadow-md: 0 8px 24px rgba(79, 70, 229, 0.10);
+  --ab-shadow-lg: 0 20px 48px rgba(79, 70, 229, 0.16);
+}
+
+html, body {
+  background: var(--ab-bg);
+  color: var(--ab-text);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ab-text);
+}
+
+a { color: var(--ab-primary); }
+a:hover { color: var(--ab-primary-dark); }
+
+.text-gradient {
+  background: var(--ab-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Layout helpers ---------- */
+.ab-section { padding: 5rem 0; }
+@media (max-width: 767.98px) {
+  .ab-section { padding: 3rem 0; }
+}
+.ab-container { max-width: 1180px; margin: 0 auto; padding: 0 1.25rem; }
+.ab-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ab-primary);
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.16);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+}
+.ab-lede {
+  color: var(--ab-text-muted);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* ---------- Navbar ---------- */
+.ab-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--ab-border);
+  transition: box-shadow 0.25s ease;
+}
+.ab-navbar.is-scrolled { box-shadow: var(--ab-shadow-sm); }
+.ab-navbar .navbar-nav .nav-link {
+  color: var(--ab-text);
+  font-weight: 500;
+  font-size: 0.94rem;
+}
+.ab-navbar .navbar-nav .nav-link:hover,
+.ab-navbar .navbar-nav .nav-link.active {
+  color: var(--ab-primary);
+}
+.ab-navbar .navbar-brand img { height: 28px; width: auto; }
+
+/* ---------- Buttons ---------- */
+.btn-gradient {
+  background: var(--ab-gradient);
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow: var(--ab-shadow-md);
+  transition: box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.btn-gradient:hover {
+  box-shadow: var(--ab-shadow-lg);
+  opacity: 0.92;
+  color: #fff !important;
+}
+
+.btn-outline-ab {
+  border: 1.5px solid var(--ab-border);
+  color: var(--ab-text);
+  background: #fff;
+  font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.btn-outline-ab:hover {
+  border-color: var(--ab-primary);
+  color: var(--ab-primary);
+}
+
+.btn-lift { transition: box-shadow 0.2s ease; }
+
+/* ---------- Cards ---------- */
+.ab-card {
+  background: #fff;
+  border: 1px solid var(--ab-border);
+  border-radius: var(--ab-radius);
+  box-shadow: var(--ab-shadow-sm);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.ab-card:hover {
+  box-shadow: var(--ab-shadow-md);
+  border-color: rgba(79, 70, 229, 0.25);
+}
+.ab-card .ab-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ab-gradient);
+  color: #fff;
+  font-size: 1.35rem;
+}
+
+/* ---------- Hero ---------- */
+.ab-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 0 5rem;
+  background:
+    radial-gradient(60% 55% at 15% 10%, rgba(79, 70, 229, 0.10), transparent 60%),
+    radial-gradient(50% 50% at 85% 20%, rgba(6, 182, 212, 0.10), transparent 60%),
+    #fff;
+}
+@media (max-width: 767.98px) {
+  .ab-hero { padding: 3.5rem 0 2.5rem; }
+}
+.ab-hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.25;
+  z-index: 0;
+}
+.ab-hero h1 { font-size: clamp(2.1rem, 4.5vw, 3.5rem); line-height: 1.12; }
+.ab-hero .ab-lede { font-size: 1.2rem; max-width: 640px; }
+
+.ab-hero-demo {
+  border-radius: 20px;
+  border: 1px solid var(--ab-border);
+  box-shadow: var(--ab-shadow-lg);
+  background: #fff;
+  overflow: hidden;
+}
+.ab-hero-demo .ab-hero-demo-bar {
+  display: flex;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ab-border);
+  background: var(--ab-surface);
+}
+.ab-hero-demo .ab-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ---------- Stats ---------- */
+.ab-stat h2 { font-size: 2.25rem; margin-bottom: 0.15rem; }
+.ab-stat span { color: var(--ab-text-muted); font-size: 0.92rem; }
+
+/* ---------- How it works ---------- */
+.ab-step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  background: rgba(79, 70, 229, 0.1);
+  color: var(--ab-primary);
+}
+.ab-step-line {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--ab-border) 0 8px, transparent 8px 14px);
+  z-index: -1;
+}
+
+/* ---------- User categories ---------- */
+.ab-category-card {
+  text-align: center;
+  padding: 0 0 1.5rem;
+  overflow: hidden;
+}
+.ab-category-photo {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+.ab-category-card .ab-card-icon {
+  margin: -22px auto 1rem;
+  position: relative;
+  border: 3px solid #fff;
+}
+
+/* ---------- Testimonials ---------- */
+.ab-testimonial-quote { font-size: 1.05rem; color: var(--ab-text); line-height: 1.7; }
+.ab-avatar-fallback,
+.ab-avatar-photo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ab-avatar-fallback {
+  background: var(--ab-gradient);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.ab-avatar-photo { object-fit: cover; }
+
+/* ---------- FAQ ---------- */
+.ab-faq-item { border-bottom: 1px solid var(--ab-border); }
+.ab-faq-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 1.25rem 0;
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--ab-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.ab-faq-icon { transition: transform 0.25s ease; color: var(--ab-primary); flex-shrink: 0; }
+.ab-faq-item[open] .ab-faq-icon { transform: rotate(45deg); }
+.ab-faq-answer { padding: 0 0 1.25rem; color: var(--ab-text-muted); line-height: 1.7; }
+
+/* ---------- CTA ---------- */
+.ab-cta {
+  border-radius: 24px;
+  background: var(--ab-gradient);
+  color: #fff;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ab-cta h2 { color: #fff; }
+.ab-cta p { color: rgba(255,255,255,0.9); }
+
+/* ---------- Footer ---------- */
+.ab-footer { background: #0B0F19; color: rgba(255,255,255,0.7); }
+.ab-footer a { color: rgba(255,255,255,0.75); text-decoration: none; }
+.ab-footer a:hover { color: #fff; }
+.ab-footer .ab-footer-brand img { height: 26px; }
+.ab-footer hr { border-color: rgba(255,255,255,0.1); }
+
+/* ---------- Scroll reveal animations (minimal: fade only, no motion) ---------- */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.reveal.in-view { opacity: 1; }
+.reveal-delay-1, .reveal-delay-2, .reveal-delay-3, .reveal-delay-4 { transition-delay: 0.05s; }
+
+@keyframes ab-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.ab-fade-in { animation: ab-fade-in 0.5s ease both; }
+
+@keyframes ab-spin {
+  to { transform: rotate(360deg); }
+}
+.ab-spinner {
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: ab-spin 0.7s linear infinite;
+}
+
+/* ---------- Forms ---------- */
+.ab-form-card {
+  border-radius: var(--ab-radius);
+  border: 1px solid var(--ab-border);
+  box-shadow: var(--ab-shadow-sm);
+}
+.form-control, .form-select {
+  border-radius: 10px;
+  border-color: var(--ab-border);
+  padding: 0.6rem 0.85rem;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--ab-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+/* ---------- Prompt / recommendation result cards ---------- */
+.ab-result-card { border-left: 4px solid var(--ab-primary); }
+.ab-copy-btn { position: relative; }
+.ab-copy-btn.copied::after {
+  content: "Copied!";
+  position: absolute;
+  top: -1.9rem;
+  right: 0;
+  font-size: 0.72rem;
+  background: var(--ab-text);
+  color: #fff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* ---------- Dashboard ---------- */
+.ab-dashboard-card { border-radius: var(--ab-radius); border: 1px solid var(--ab-border); }
+.ab-dash-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: #fff;
+}
+
+/* ---------- Resource cards ---------- */
+.ab-resource-card .ab-card-icon { width: 40px; height: 40px; font-size: 1.1rem; border-radius: 10px; }
+
+/* ---------- Utility ---------- */
+.ab-divider { height: 1px; background: var(--ab-border); border: none; }

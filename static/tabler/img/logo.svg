@@ -1,0 +1,26 @@
+<svg width="176" height="40" viewBox="0 0 176 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AIBridge logo">
+  <defs>
+    <linearGradient id="aibridgeGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="55%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- bridge pillars -->
+  <rect x="2" y="24" width="7" height="13" rx="2" fill="url(#aibridgeGrad)"/>
+  <rect x="31" y="24" width="7" height="13" rx="2" fill="url(#aibridgeGrad)"/>
+
+  <!-- bridge arc connecting the pillars -->
+  <path d="M5.5 25C5.5 11 34.5 11 34.5 25" stroke="url(#aibridgeGrad)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- deck of the bridge -->
+  <path d="M2 30H38" stroke="url(#aibridgeGrad)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- AI spark above the bridge -->
+  <circle cx="20" cy="9" r="4.5" fill="url(#aibridgeGrad)"/>
+  <path d="M20 1.5V0M13.5 5.5L12.2 4.2M26.5 5.5L27.8 4.2" stroke="url(#aibridgeGrad)" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- wordmark -->
+  <text x="48" y="27" font-family="Inter, -apple-system, Segoe UI, sans-serif" font-size="21" font-weight="700" fill="#111827">AI<tspan fill="#4F46E5">Bridge</tspan></text>
+</svg>

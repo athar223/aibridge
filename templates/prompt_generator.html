@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Prompt Generator — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="ab-hero py-5">
+  <div class="ab-container text-center reveal">
+    <span class="ab-eyebrow"><i class="ti ti-wand"></i> Prompt Generator</span>
+    <h1 class="mt-3 mb-3">Turn any task into a great prompt</h1>
+    <p class="ab-lede mx-auto" style="max-width:600px;">Describe what you want to do and get beginner, professional and advanced prompts &mdash; ready to copy and paste.</p>
+  </div>
+</section>
+
+<section class="ab-section pt-0">
+  <div class="ab-container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8 reveal">
+        <div class="ab-form-card p-4 p-md-5">
+          <form method="post" novalidate id="promptForm">
+            {% csrf_token %}
+            <label class="form-label" for="{{ form.task.id_for_label }}">Task description</label>
+            {{ form.task }}
+            {% for error in form.task.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            <button type="submit" class="btn btn-gradient btn-lg w-100 mt-4 btn-lift" id="promptSubmitBtn">
+              <i class="ti ti-sparkles me-1"></i> Generate Prompts
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% if result %}
+      {% if result.error %}
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="alert alert-danger">
+              <strong>We couldn't reach the AI service.</strong>
+              <div class="small mt-1">{{ result.error }}</div>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="row g-4 ab-fade-in">
+          <div class="col-lg-4">
+            <div class="ab-card ab-result-card p-4 h-100 d-flex flex-column">
+              <span class="ab-eyebrow mb-3" style="align-self:flex-start;"><i class="ti ti-seedling"></i> Beginner</span>
+              <p class="small flex-fill" id="promptBeginner">{{ result.beginner }}</p>
+              <button class="btn btn-outline-ab btn-sm ab-copy-btn align-self-start" data-copy-target="#promptBeginner">
+                <i class="ti ti-copy me-1"></i> Copy
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ab-card ab-result-card p-4 h-100 d-flex flex-column">
+              <span class="ab-eyebrow mb-3" style="align-self:flex-start;"><i class="ti ti-briefcase"></i> Professional</span>
+              <p class="small flex-fill" id="promptProfessional">{{ result.professional }}</p>
+              <button class="btn btn-outline-ab btn-sm ab-copy-btn align-self-start" data-copy-target="#promptProfessional">
+                <i class="ti ti-copy me-1"></i> Copy
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ab-card ab-result-card p-4 h-100 d-flex flex-column">
+              <span class="ab-eyebrow mb-3" style="align-self:flex-start;"><i class="ti ti-rocket"></i> Advanced</span>
+              <p class="small flex-fill" id="promptAdvanced">{{ result.advanced }}</p>
+              <button class="btn btn-outline-ab btn-sm ab-copy-btn align-self-start" data-copy-target="#promptAdvanced">
+                <i class="ti ti-copy me-1"></i> Copy
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("promptForm");
+    var btn = document.getElementById("promptSubmitBtn");
+    if (form && btn && window.AIBridge) {
+      window.AIBridge.submitWithLoading(form, btn, "Generating...");
+    }
+  });
+</script>
+{% endblock %}

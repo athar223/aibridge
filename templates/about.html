@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}About — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<section class="ab-hero py-5">
+  <div class="ab-container text-center reveal">
+    <span class="ab-eyebrow"><i class="ti ti-info-circle"></i> About Us</span>
+    <h1 class="mt-3 mb-3">We're building the bridge between people and AI</h1>
+    <p class="ab-lede mx-auto" style="max-width:640px;">AIBridge exists so that anyone &mdash; regardless of technical background &mdash; can put AI to work for their goals.</p>
+  </div>
+</section>
+
+<section class="ab-section">
+  <div class="ab-container">
+    <div class="row g-4">
+      <div class="col-md-6 reveal">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-target-arrow"></i></div>
+          <h3 class="h4 mb-2">Our Mission</h3>
+          <p class="text-secondary mb-0">To make AI adoption simple, practical and personal &mdash; helping students, freelancers, teachers, professionals and small business owners use AI to achieve real outcomes, not just experiment with it.</p>
+        </div>
+      </div>
+      <div class="col-md-6 reveal reveal-delay-1">
+        <div class="ab-card p-4 h-100">
+          <div class="ab-card-icon mb-3"><i class="ti ti-telescope"></i></div>
+          <h3 class="h4 mb-2">Our Vision</h3>
+          <p class="text-secondary mb-0">A world where AI literacy is as common as internet literacy &mdash; where anyone can confidently choose the right tool, write the right prompt, and apply AI to move their life and work forward.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ab-section" style="background:var(--ab-surface);">
+  <div class="ab-container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6 reveal">
+        <span class="ab-eyebrow"><i class="ti ti-alert-triangle"></i> The Problem</span>
+        <h2 class="mt-3 mb-3">Awareness of AI has outpaced the ability to use it</h2>
+        <p class="ab-lede">Most people have heard of ChatGPT, Gemini, and dozens of other AI tools &mdash; but few know which one fits their specific need, how to write prompts that get useful results, or how to weave AI into their studies, freelance work, teaching, or business.</p>
+      </div>
+      <div class="col-lg-6 reveal reveal-delay-1">
+        <span class="ab-eyebrow"><i class="ti ti-bulb"></i> Our Solution</span>
+        <h2 class="mt-3 mb-3">Personalized, actionable AI guidance</h2>
+        <p class="ab-lede">AIBridge takes a simple description of your goal and returns concrete, tailored guidance &mdash; the AI tools to use, why they help, how to prompt them effectively, and what to do next. No generic listicles. No guesswork.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ab-section">
+  <div class="ab-container">
+    <div class="ab-cta reveal">
+      <h2 class="mb-3">See AIBridge in action</h2>
+      <p class="mb-4 mx-auto" style="max-width:520px;">Describe your goal and get a personalized AI action plan in under a minute.</p>
+      <a href="{% url 'core:recommender' %}" class="btn btn-light btn-lg btn-lift px-4 fw-bold">Try the AI Recommender</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
