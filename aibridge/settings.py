@@ -25,10 +25,16 @@ DEBUG = _env_bool("DEBUG", True)
 _hosts = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost")
 ALLOWED_HOSTS = [h.strip() for h in _hosts.split(",") if h.strip()]
 
-# Allow Render/Railway style hosts automatically when provided.
+# Allow Render/Railway/Vercel style hosts automatically when provided.
 _render_host = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if _render_host and _render_host not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(_render_host)
+
+_vercel_host = os.environ.get("VERCEL_URL")
+if _vercel_host and _vercel_host not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(_vercel_host)
+if os.environ.get("VERCEL") and ".vercel.app" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(".vercel.app")
 
 def _to_origin(host):
     if host.startswith("."):
@@ -80,12 +86,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "aibridge.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+# Vercel's filesystem is read-only (except /tmp), so SQLite cannot persist
+# there. When DATABASE_URL is set (e.g. a hosted Postgres on Vercel/Neon),
+# use it; otherwise fall back to local SQLite for normal hosting/dev.
+_database_url = os.environ.get("DATABASE_URL")
+if _database_url:
+    import dj_database_url
+
+    DATABASES = {
+        "default": dj_database_url.parse(_database_url, conn_max_age=600, ssl_require=True)
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
