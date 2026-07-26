@@ -119,9 +119,18 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# On Vercel, static/** is served directly by the CDN (see vercel.json) and no
+# collectstatic step ever runs, so there's no manifest for WhiteNoise's
+# hashing storage to read. Plain storage just emits STATIC_URL + path, which
+# matches how vercel.json routes the raw source tree.
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": (
+            "django.contrib.staticfiles.storage.StaticFilesStorage"
+            if os.environ.get("VERCEL")
+            else "whitenoise.storage.CompressedManifestStaticFilesStorage"
+        ),
     },
 }
 

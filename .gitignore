@@ -25,3 +25,6 @@ Thumbs.db
 # Tooling / local downloads (not part of the project)
 .claude/
 *.zip
+
+.vercel
+.env*
