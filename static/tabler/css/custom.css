@@ -73,6 +73,9 @@ a:hover { color: var(--ab-primary-dark); }
 
 /* ---------- Navbar ---------- */
 .ab-navbar {
+  /* body is a flex-column (sticky footer layout); without flex:none this
+     flex item fails to resize when the mobile collapse menu expands. */
+  flex: none;
   position: sticky;
   top: 0;
   z-index: 1030;
@@ -283,7 +286,7 @@ a:hover { color: var(--ab-primary-dark); }
 .ab-cta p { color: rgba(255,255,255,0.9); }
 
 /* ---------- Footer ---------- */
-.ab-footer { background: #0B0F19; color: rgba(255,255,255,0.7); }
+.ab-footer { flex: none; background: #0B0F19; color: rgba(255,255,255,0.7); }
 .ab-footer a { color: rgba(255,255,255,0.75); text-decoration: none; }
 .ab-footer a:hover { color: #fff; }
 .ab-footer .ab-footer-brand img { height: 26px; }
